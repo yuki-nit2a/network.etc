@@ -1,0 +1,20 @@
+source /etc/network/interfaces.d/*
+
+auto lo
+iface lo inet loopback
+
+allow-hotplug eth0
+auto eth0
+iface eth0 inet dhcp
+
+allow-hotplug eth1
+auto eth1
+iface eth1 inet static
+    address 169.254.101.2
+    netmask 255.255.0.0
+
+pre-up /sbin/ifconfig eth0 up
+pre-up /sbin/ifconfig eth1 up
+post-down /sbin/ifconfig eth0 down
+post-dowm /sbin/ifconfig eth1 down
+
